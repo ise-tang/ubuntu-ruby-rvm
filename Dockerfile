@@ -5,14 +5,14 @@
 From ubuntu:latest
 MAINTAINER issei126
 
-RUN useradd -m -d /home/issei126 -s /bin/bash issei126
+RUN useradd -m -d /home/issei126 -s /bin/bash issei126 -g wheel
 RUN echo "issei126:issei126" | chpasswd \
  && mkdir /home/issei126/.ssh \
  && chmod 700 /home/issei126/.ssh \
  && chown -R issei126:issei126 /home/issei126/.ssh
 
 RUN echo "issei126 ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-RUN sudo gpasswd -a issei126 sudo
+RUN echo "Defaults        exempt_group=wheel" >> /etc/sudoers
 WORKDIR /home/issei126
 
 RUN apt-get update
