@@ -5,7 +5,7 @@
 From ubuntu:latest
 MAINTAINER issei126
 
-RUN useradd -m -d /home/issei126 -s /bin/bash issei126 -g wheel
+RUN useradd -m -d /home/issei126 -s /bin/bash -g wheel issei126 
 RUN echo "issei126:issei126" | chpasswd \
  && mkdir /home/issei126/.ssh \
  && chmod 700 /home/issei126/.ssh \
