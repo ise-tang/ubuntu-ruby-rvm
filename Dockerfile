@@ -2,7 +2,7 @@
 # Ruby with RVM on Japanese Ubuntu Dockerfile
 #
 
-From densuke/ubuntu-jp-remix
+From densuke/ubuntu-jp-remix:trusty
 MAINTAINER issei126
 
 RUN useradd -m -d /home/issei126 -s /bin/bash -g users issei126 
