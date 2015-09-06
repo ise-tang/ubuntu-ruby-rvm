@@ -1,10 +1,19 @@
 #
-# Ruby with RVM Dockerfile
+# Ruby with RVM on Japanese Ubuntu Dockerfile
 #
 
 From ubuntu:latest
 MAINTAINER issei126
 
+# Japanese packages
+
+RUN wget -q https://www.ubuntulinux.jp/ubuntu-ja-archive-keyring.gpg -O- | sudo apt-key add -
+RUN wget -q https://www.ubuntulinux.jp/ubuntu-jp-ppa-keyring.gpg -O- | sudo apt-key add -
+RUN sudo wget https://www.ubuntulinux.jp/sources.list.d/vivid.list -O /etc/apt/sources.list.d/ubuntu-ja.list
+RUN sudo apt-get update
+RUN sudo apt-get upgrade -y
+RUN sudo apt-get install ubuntu-defaults-ja -y
+ 
 RUN useradd -m -d /home/issei126 -s /bin/bash -g users issei126 
 RUN echo "issei126:issei126" | chpasswd \
  && mkdir /home/issei126/.ssh \
@@ -31,7 +40,5 @@ RUN /bin/bash -l -c "rvm install 2.0"
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 RUN \touch .bashrc
 RUN echo 'source /etc/profile.d/rvm.sh' > .bashrc
-
-RUN gem install bundler
 
 USER issei126
